@@ -2,8 +2,8 @@
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) { 
-    let div = document.getElementById('missionTarget')
-    div.innerHTML = `
+    let missionTarget = document.getElementById('missionTarget')
+    missionTarget.innerHTML = `
     <h2>Mission Destination</h2>
         <ol>
             <li>Name: ${name}</li>
@@ -16,7 +16,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 }
 
 function validateInput(testInput) {
-    if (testInput === "") {
+    if (testInput.length === 0) {
         return "Empty";
     } else if (isNaN(testInput) === true) {
         return "Is Not a Number";
@@ -26,15 +26,15 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    let launchStatus = document.getElementById("launchStatus");
     let pilotStatus = document.getElementById("pilotStatus");
     let copilotStatus = document.getElementById("copilotStatus");
     let fuelStatus = document.getElementById("fuelStatus");
     let cargoStatus = document.getElementById("cargoStatus");
-    let h2 = document.getElementById("launchStatus");
 
     if (fuelLevel < 10000) {
         list.style.visibility="visible";
-        h2.style.color = "red";
+        h2.style.color = "rgb(255, 0, 0)";
         h2.innerHTML = "Shuttle not ready for Launch"
         pilotStatus = `Pilot ${pilot} is ready for launch`;
         copilotStatus = `Copilot ${copilot} is ready for launch`;
@@ -42,7 +42,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
      
      } else if (cargoLevel > 10000) {
         list.style.visibility="visible";
-        h2.style.color = "red";
+        h2.style.color = "rgb(255, 0, 0)";
         h2.innerHTML = "Shuttle not ready for Launch"
         pilotStatus = `Pilot ${pilot} is ready for launch`;
         copilotStatus = `Copilot ${copilot} is ready for launch`;
@@ -50,14 +50,14 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
      
      } else if (cargoLevel > 10000 && fuelLevel < 10000) {
          list.style.visibility = "visible";
-         h2.style.color = "red";
+         h2.style.color = "rgb(255, 0, 0)";
          h2.innerHTML = "Shuttle not ready for Launch";
          cargoStatus.innerHTML = "Cargo mass too heavy for launch";
          fuelStatus.innerHTML = "Fuel to low for launch";
      
      } else if (cargoLevel <= 10000 && fuelLevel >= 10000) {
          list.style.visibility = "visible";
-         h2.style.color = "rgb (65,159, 107)";
+         h2.style.color = "rgb (69, 75, 27)";
          h2.innerHTML = "Shuttle ready for launch";
          pilotStatus = `Pilot ${pilot} is ready for launch`;
          copilotStatus = `Copilot ${copilot} is ready for launch`;
@@ -68,23 +68,19 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 }
 
 async function myFetch() {
-    let planetsReturned;
-
-    planetsReturned = await fetch().then( function(response) {
-        let planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json');
-    const thePlanets = await planetsReturned.json();
-    console.log(thePlanets);
-    return thePlanets;
-    });
-
-    return planetsReturned;
-}
+    let planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json');
+    let planet = await planetsReturned.json();
+    console.log(planet);
+    return planet;
+    }
 
 function pickPlanet(planets) {
-    let index = Math.floor(Math.random() * planets.length);
-    let myPlanet = planets[index];
-    return myPlanet;
+    let index = Math.floor(Math.random()*planets.length);
+    let missionPlanet = planets[index];
+    return missionPlanet;
+    
 }
+
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;

@@ -1,9 +1,7 @@
 // Write your JavaScript code here!
 
-const { myFetch } = require("./scriptHelper");
-
 window.addEventListener("load", function() {
-    const document = window.document;
+    const document = window.document
     const pilot = document.querySelector("input[name=pilotName]");
     const copilot = document.querySelector("input[name=copilotName]");
     const fuelLevel = document.querySelector("input[name=fuelLevel]");
@@ -48,6 +46,6 @@ window.addEventListener("load", function() {
        console.log(listedPlanets);
        let pickedPlanet = pickedPlanet(listedPlanets);
    })
-     addDestinationInfo(window.document, pickedPlanet.name, pickedPlanet.diameter, pickedPlanet.star, pickedPlanet.distance, pickedPlanet.moons, pickedPlanet.image)
+     addDestinationInfo(window.document, planet.name, planet.diameter, planet.star, planet.distance, planet.moons, planet.image)
 
 });
