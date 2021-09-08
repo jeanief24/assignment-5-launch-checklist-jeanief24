@@ -6,11 +6,11 @@ window.addEventListener("load", function() {
     document.getElementById("faultyItems").style.visibility="hidden";
 
     form.addEventListener("submit", function(event) {
-        const pilot = document.querySelector("input[name=pilotName]");
-        const copilot = document.querySelector("input[name=copilotName]");
-        const fuelLevel = document.querySelector("input[name=fuelLevel]");
-        const cargoLevel = document.querySelector("input[name=cargoMass");
-        const list = document.getElementById("faultyItems");
+        let pilot = document.querySelector("input[name=pilotName]").value;
+        let copilot = document.querySelector("input[name=copilotName]").value;
+        let fuelLevel = document.querySelector("input[name=fuelLevel]").value;
+        let cargoLevel = document.querySelector("input[name=cargoMass").value;
+        let list = document.querySelector("faultyItems");
         
         formSubmission(document, list, pilot.value, copilot.value, fuelLevel.value, cargoLevel.value);
         event.preventDefault();
@@ -32,7 +32,7 @@ window.addEventListener("load", function() {
             list.style.visibility = "hidden";
             alert("Fuel level and Cargo Mass must be numbers only.");
             event.preventDefault();
-        )};
+        };
 
    let listedPlanets;
    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
@@ -41,9 +41,9 @@ window.addEventListener("load", function() {
    listedPlanetsResponse.then(function (result) {
        listedPlanets = result;
        console.log(listedPlanets);
-
+   
        let planet = pickPlanet(listedPlanets);
-
+   
        let planetName = planet["name"];
        let planetDiameter = planet["diameter"];
        let planetStar = planet["star"];
@@ -53,4 +53,4 @@ window.addEventListener("load", function() {
 
      addDestinationInfo(window.document, planetName, planetDiameter, planetStar, planetDistance, planetMoons, planetImage)
    });
-});
+})

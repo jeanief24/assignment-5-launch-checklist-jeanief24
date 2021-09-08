@@ -2,7 +2,7 @@
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) { 
-    let missionTarget = document.getElementById('missionTarget')
+    missionTarget = document.getElementById('missionTarget')
     missionTarget.innerHTML = `
     <h2>Mission Destination</h2>
         <ol>
@@ -12,7 +12,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
             <li>Distance from Earth: ${distance}</li>
             <li>Number of Moons: ${moons}</li>
         </ol>
-        <img src= ${imageUrl}> `
+        <img src= ${imageUrl}>`
 }
 
 function validateInput(testInput) {
@@ -26,41 +26,40 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    let launchStatus = document.getElementById("launchStatus");
-    let pilotStatus = document.getElementById("pilotStatus");
-    let copilotStatus = document.getElementById("copilotStatus");
-    let fuelStatus = document.getElementById("fuelStatus");
-    let cargoStatus = document.getElementById("cargoStatus");
+    let pilotData = document.getElementById("pilotStatus");
+    let copilotData = document.getElementById("copilotStatus");
+    let fuelLevelData = document.getElementById("fuelStatus");
+    let cargoLevelData = document.getElementById("cargoStatus");
 
-    if (fuelLevel < 10000) {
+    if (fuelLevelData < 10000) {
         list.style.visibility="visible";
         h2.style.color = "rgb(255, 0, 0)";
         h2.innerHTML = "Shuttle not ready for Launch"
-        pilotStatus = `Pilot ${pilot} is ready for launch`;
-        copilotStatus = `Copilot ${copilot} is ready for launch`;
+        pilotStatus = `Pilot ${pilot} Ready`;
+        copilotStatus = `Co-pilot ${copilot} Ready`;
         fuelStatus.innerHTML = "Fuel too low for launch";
      
-     } else if (cargoLevel > 10000) {
+     } else if (cargoLevelData > 10000) {
         list.style.visibility="visible";
         h2.style.color = "rgb(255, 0, 0)";
         h2.innerHTML = "Shuttle not ready for Launch"
-        pilotStatus = `Pilot ${pilot} is ready for launch`;
-        copilotStatus = `Copilot ${copilot} is ready for launch`;
+        pilotStatus = `Pilot ${pilot} Ready`;
+        copilotStatus = `Co-pilot ${copilot} Ready`;
         cargoStatus.innerHTML = "Cargo mass too heavy for launch";
      
-     } else if (cargoLevel > 10000 && fuelLevel < 10000) {
+     } else if (cargoLevelData > 10000 && fuelLevelData < 10000) {
          list.style.visibility = "visible";
          h2.style.color = "rgb(255, 0, 0)";
          h2.innerHTML = "Shuttle not ready for Launch";
          cargoStatus.innerHTML = "Cargo mass too heavy for launch";
          fuelStatus.innerHTML = "Fuel to low for launch";
      
-     } else if (cargoLevel <= 10000 && fuelLevel >= 10000) {
+     } else if (cargoLevelData <= 10000 && fuelLevelData >= 10000) {
          list.style.visibility = "visible";
          h2.style.color = "rgb (69, 75, 27)";
          h2.innerHTML = "Shuttle ready for launch";
-         pilotStatus = `Pilot ${pilot} is ready for launch`;
-         copilotStatus = `Copilot ${copilot} is ready for launch`;
+         pilotStatus = `Pilot ${pilot} Ready`;
+         copilotStatus = `Co-pilot ${copilot} Ready`;
          fuelStatus = "Fuel level high enough for launch";
          cargoStatus = "Cargo Mass low enough for launch";
         }
