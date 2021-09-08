@@ -1,23 +1,23 @@
 // Write your JavaScript code here!
 
+const { pickPlanet } = require("./scriptHelper");
+
 window.addEventListener("load", function() {
     let form = document.querySelector("form")
     form.reset();
     document.getElementById("faultyItems").style.visibility="hidden";
 
     form.addEventListener("submit", function(event) {
-        let pilot = document.querySelector("input[name=pilotName]").value;
-        let copilot = document.querySelector("input[name=copilotName]").value;
-        let fuelLevel = document.querySelector("input[name=fuelLevel]").value;
-        let cargoLevel = document.querySelector("input[name=cargoMass").value;
+        let pilot = document.querySelector("input[name=pilotName]");
+        let copilot = document.querySelector("input[name=copilotName]");
+        let fuelLevel = document.querySelector("input[name=fuelLevel]");
+        let cargoLevel = document.querySelector("input[name=cargoMass");
         let list = document.querySelector("faultyItems");
-
-        let message = "Hello!";
-        
+           
         formSubmission(document, list, pilot.value, copilot.value, fuelLevel.value, cargoLevel.value);
         event.preventDefault();
 
-        if (validateInput(pilot.value) == "Empty" || validateInput(copilot.value) == "Empty" || validateInput(fuelLevel.value) == "Empty" ||
+       if (validateInput(pilot.value) == "Empty" || validateInput(copilot.value) == "Empty" || validateInput(fuelLevel.value) == "Empty" ||
         validateInput(cargoLevel.value) == "Empty") {
             list.style.visibility = "hidden";
             alert("All fields required");
@@ -43,16 +43,9 @@ window.addEventListener("load", function() {
    listedPlanetsResponse.then(function (result) {
        listedPlanets = result;
        console.log(listedPlanets);
-   
+   }).then(function() {
+       console.log(listedPlanets);
        let planet = pickPlanet(listedPlanets);
-   
-       let planetName = planet["name"];
-       let planetDiameter = planet["diameter"];
-       let planetStar = planet["star"];
-       let planetDistance = planet["distance"];
-       let planetMoons = planet["moons"];
-       let planetImageUrl = planet["image"];
-
-     addDestinationInfo(window.document, planetName, planetDiameter, planetStar, planetDistance, planetMoons, planetImage)
-   });
+       addDestinationInfo(document, planet.name, planet.diameter, planet.star, planet.distance, planet.moons, planet.image)
+    });
 });
