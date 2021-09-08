@@ -1,7 +1,7 @@
 // Write your JavaScript code here!
 
 window.addEventListener("load", function() {
-    let form = document.querySelector("form");
+    let form = document.querySelector("form")
     form.reset();
     document.getElementById("faultyItems").style.visibility="hidden";
 
@@ -11,6 +11,8 @@ window.addEventListener("load", function() {
         let fuelLevel = document.querySelector("input[name=fuelLevel]").value;
         let cargoLevel = document.querySelector("input[name=cargoMass").value;
         let list = document.querySelector("faultyItems");
+
+        let message = "Hello!";
         
         formSubmission(document, list, pilot.value, copilot.value, fuelLevel.value, cargoLevel.value);
         event.preventDefault();
@@ -53,4 +55,4 @@ window.addEventListener("load", function() {
 
      addDestinationInfo(window.document, planetName, planetDiameter, planetStar, planetDistance, planetMoons, planetImage)
    });
-})
+});
