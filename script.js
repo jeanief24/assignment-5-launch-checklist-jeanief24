@@ -1,18 +1,19 @@
 // Write your JavaScript code here!
 
 window.addEventListener("load", function() {
-    const document = window.document
-    const pilot = document.querySelector("input[name=pilotName]");
-    const copilot = document.querySelector("input[name=copilotName]");
-    const fuelLevel = document.querySelector("input[name=fuelLevel]");
-    const cargoLevel = document.querySelector("input[name=cargoMass");
-    const list = document.getElementById("faultyItems");
-
-    list.style.visibility = "hidden";
-
     let form = document.querySelector("form");
+    form.reset();
+    document.getElementById("faultyItems").style.visibility="hidden";
+
     form.addEventListener("submit", function(event) {
+        const pilot = document.querySelector("input[name=pilotName]");
+        const copilot = document.querySelector("input[name=copilotName]");
+        const fuelLevel = document.querySelector("input[name=fuelLevel]");
+        const cargoLevel = document.querySelector("input[name=cargoMass");
+        const list = document.getElementById("faultyItems");
+        
         formSubmission(document, list, pilot.value, copilot.value, fuelLevel.value, cargoLevel.value);
+        event.preventDefault();
 
         if (validateInput(pilot.value) == "Empty" || validateInput(copilot.value) == "Empty" || validateInput(fuelLevel.value) == "Empty" ||
         validateInput(cargoLevel.value) == "Empty") {
@@ -31,9 +32,7 @@ window.addEventListener("load", function() {
             list.style.visibility = "hidden";
             alert("Fuel level and Cargo Mass must be numbers only.");
             event.preventDefault();
-        }
-        event.preventDefault();
-    )};
+        )};
 
    let listedPlanets;
    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
@@ -42,10 +41,16 @@ window.addEventListener("load", function() {
    listedPlanetsResponse.then(function (result) {
        listedPlanets = result;
        console.log(listedPlanets);
-   }).then(function () {
-       console.log(listedPlanets);
-       let pickedPlanet = pickedPlanet(listedPlanets);
-   })
-     addDestinationInfo(window.document, planet.name, planet.diameter, planet.star, planet.distance, planet.moons, planet.image)
 
+       let planet = pickPlanet(listedPlanets);
+
+       let planetName = planet["name"];
+       let planetDiameter = planet["diameter"];
+       let planetStar = planet["star"];
+       let planetDistance = planet["distance"];
+       let planetMoons = planet["moons"];
+       let planetImageUrl = planet["image"];
+
+     addDestinationInfo(window.document, planetName, planetDiameter, planetStar, planetDistance, planetMoons, planetImage)
+   });
 });

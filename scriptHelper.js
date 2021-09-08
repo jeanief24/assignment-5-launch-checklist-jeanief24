@@ -68,19 +68,16 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 }
 
 async function myFetch() {
-    let planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json');
-    let planet = await planetsReturned.json();
-    console.log(planet);
-    return planet;
+    planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response) {
+        return response.json();
+    });
+    return planetsReturned;
     }
 
 function pickPlanet(planets) {
-    let index = Math.floor(Math.random()*planets.length);
-    let missionPlanet = planets[index];
-    return missionPlanet;
+    return planets[Math.floor(Math.random()*planets.length)];
     
 }
-
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
